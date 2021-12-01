@@ -20,10 +20,10 @@ exports.listBooks = async (collection) => {
 exports.updateBook = async (collection, dataObj) => {
     // console.log(dataObj)
     try {
-        const findAmendOne = await collection.find({ _id: ObjectId(dataObj._id) }).toArray()
-        console.log(findAmendOne)
-
-        // const amendOne = await collection.updateOne()
+        const findAmendOne = await collection.updateMany({ _id: ObjectId(dataObj._id) }, {$set: {dataObj}})
+        
+        // console.log(findAmendOne)
+        // const amendOne = await collection.updateOne(dataObj)
         // console.log(`The book selected was: ${findAmendOne}`)
         // console.log(`The book has been amended to: ${amendOne}`)
     } catch (error) {
