@@ -31,9 +31,9 @@ exports.updateBook = async (collection, dataObj) => {
     }
 }
 
-exports.deleteBook = async (collection) => {
+exports.deleteBook = async (collection, dataObj) => {
     try {
-        await collection.deleteOne({ _id: { $lt: "61a63fbe017e577346af3b74" } })
+        const deleteOne = await collection.deleteOne({ _id: ObjectId(dataObj._id) })
         console.log("Book deleted")
     } catch (error) {
         console.log(error)

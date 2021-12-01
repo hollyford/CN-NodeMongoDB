@@ -23,7 +23,7 @@ const app = async () => {
         }
         await connection(updateBook, editedBook);
     } else if (command === "delete") {
-        await connection(deleteBook);
+        await connection(deleteBook, {_id:process.argv[3]});
     }else {
         console.log("Incorrect Input")
     }
