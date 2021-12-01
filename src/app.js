@@ -1,5 +1,5 @@
 const connection = require("./db/connection");
-const { addBook, listBooks, updateBook } = require("./utils")
+const { addBook, listBooks, updateBook, deleteBook } = require("./utils")
 
 
 const command = process.argv[2];
@@ -15,7 +15,15 @@ const app = async () => {
     } else if (command === "list") {
         await connection(listBooks);
     } else if (command === "amend") {
-        await connection(updateBook);
+        const editedBook = {
+            _id: process.argv[3],
+            author: process.argv[4],
+            title: process.argv[5],
+            genre: process.argv[6]
+        }
+        await connection(updateBook, editedBook);
+    } else if (command === "delete") {
+        await connection(deleteBook);
     }else {
         console.log("Incorrect Input")
     }

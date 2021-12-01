@@ -1,3 +1,4 @@
+const { ObjectId } = require("bson");
 
 exports.addBook = async (collection, dataObj) => {
     try {
@@ -17,19 +18,25 @@ exports.listBooks = async (collection) => {
 }
 
 exports.updateBook = async (collection, dataObj) => {
+    // console.log(dataObj)
     try {
-        const listOne = await collection.find({title: {$lt: "Billy Summers"}})
-        const updateOne = await collection.updateOne(dataObj)
+        const findAmendOne = await collection.find({ _id: ObjectId(dataObj._id) }).toArray()
+        console.log(findAmendOne)
+
+        // const amendOne = await collection.updateOne()
+        // console.log(`The book selected was: ${findAmendOne}`)
+        // console.log(`The book has been amended to: ${amendOne}`)
     } catch (error) {
         console.log(error)
     }
 }
 
-// exports.findBooks = async (collection, dataObj) => {
-//     try {
-//         const filteredBooks = await collection.find({  }).toArray();
-//         console.log('Found documents filtered by {  } =>', filteredBooks);
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+exports.deleteBook = async (collection) => {
+    try {
+        await collection.deleteOne({ _id: { $lt: "61a63fbe017e577346af3b74" } })
+        console.log("Book deleted")
+    } catch (error) {
+        console.log(error)
+    }
+}
+
