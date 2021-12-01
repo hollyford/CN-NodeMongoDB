@@ -18,7 +18,8 @@ exports.listBooks = async (collection) => {
 
 exports.updateBook = async (collection, dataObj) => {
     try {
-        const updateOne = await collection.updateOne()
+        const listOne = await collection.find({title: {$lt: "Billy Summers"}})
+        const updateOne = await collection.updateOne(dataObj)
     } catch (error) {
         console.log(error)
     }
