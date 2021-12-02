@@ -16,10 +16,10 @@ const app = async () => {
         await connection(listBooks);
     } else if (command === "amend") {
         const editedBook = {
-            _id: process.argv[3],
-            author: process.argv[4],
-            title: process.argv[5],
-            genre: process.argv[6]
+            // _id: process.argv[3],
+            author: process.argv[3],
+            title: process.argv[4],
+            genre: process.argv[5]
         }
         await connection(updateBook, editedBook);
     } else if (command === "delete") {

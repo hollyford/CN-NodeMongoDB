@@ -1,5 +1,5 @@
 const { ObjectId } = require("bson");
-
+// Working functions :
 exports.addBook = async (collection, dataObj) => {
     try {
         await collection.insertOne(dataObj)
@@ -17,20 +17,6 @@ exports.listBooks = async (collection) => {
     }
 }
 
-exports.updateBook = async (collection, dataObj) => {
-    // console.log(dataObj)
-    try {
-        const findAmendOne = await collection.updateMany({ _id: ObjectId(dataObj._id) }, {$set: {dataObj}})
-        
-        // console.log(findAmendOne)
-        // const amendOne = await collection.updateOne(dataObj)
-        // console.log(`The book selected was: ${findAmendOne}`)
-        // console.log(`The book has been amended to: ${amendOne}`)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 exports.deleteBook = async (collection, dataObj) => {
     try {
         const deleteOne = await collection.deleteOne({ _id: ObjectId(dataObj._id) })
@@ -39,4 +25,21 @@ exports.deleteBook = async (collection, dataObj) => {
         console.log(error)
     }
 }
+// End of working functions
+
+// start of functions being worked on : 
+
+exports.updateBook = async (collection, dataObj) => {
+    // console.log(dataObj)
+    try {
+        const findAmendOne = await collection.updateOne({ author: dataObj.author }, {$set: dataObj})
+        // const findAmendOne = await collection.updateOne({ _id: ObjectId(dataObj._id) }, {$set: dataObj})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// const filteredDocs = await collection.find({rating: {$gt: "4/10"}, {title}}).toArray();
+
+
 
